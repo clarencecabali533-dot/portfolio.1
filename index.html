@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clarence Cabali | Full-Stack Developer & Software Engineer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            DEFAULT: '#0a0a0c',
+                            surface: '#121216',
+                            border: '#22222c',
+                        },
+                        accent: {
+                            DEFAULT: '#10b981',
+                            hover: '#059669',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0c;
+            color: #f3f4f6;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0c; }
+        ::-webkit-scrollbar-thumb { background: #22222c; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+    </style>
+</head>
+<body class="bg-dark text-gray-100 selection:bg-accent selection:text-black">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-dark transition-all duration-300">
+                    <i data-lucide="code-2" class="w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-lg tracking-tight">Clarence<span class="text-accent">.dev</span></span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-sm font-medium text-gray-400 hover:text-accent transition-colors">About</a>
+                <a href="#projects" class="text-sm font-medium text-gray-400 hover:text-accent transition-colors">Projects</a>
+                <a href="#experience" class="text-sm font-medium text-gray-400 hover:text-accent transition-colors">Experience</a>
+                <a href="#contact" class="px-4 py-2 rounded-lg bg-accent/10 border border-accent/30 text-accent text-sm font-medium hover:bg-accent hover:text-dark transition-all">Let's Talk</a>
+            </nav>
+            <button id="menu-btn" class="md:hidden text-gray-400 hover:text-white p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-dark-surface border-b border-dark-border px-6 py-6 flex flex-col gap-4 md:hidden shadow-2xl">
+            <a href="#about" class="mobile-link text-base font-medium text-gray-300 hover:text-accent">About</a>
+            <a href="#projects" class="mobile-link text-base font-medium text-gray-300 hover:text-accent">Projects</a>
+            <a href="#experience" class="mobile-link text-base font-medium text-gray-300 hover:text-accent">Experience</a>
+            <a href="#contact" class="mobile-link w-full text-center py-3 rounded-lg bg-accent text-dark font-semibold">Let's Talk</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-5xl mx-auto w-full text-center relative z-10 flex flex-col items-center">
+            
+            <!-- Profile Avatar Picture -->
+            <div class="relative mb-8 group">
+                <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 opacity-75 blur group-hover:opacity-100 transition duration-500"></div>
+                <div class="relative w-32 h-32 rounded-full p-1 bg-dark-surface border border-dark-border overflow-hidden shadow-2xl">
+                    <img 
+                        src="https://scontent-mnl3-3.xx.fbcdn.net/v/t39.30808-6/720571192_1541210927412776_5339618040919845488_n.jpg?stp=dst-jpg_tt6&cstp=mx1080x1093&ctp=s1080x1093&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=DY-21v0rqBYQ7kNvwGewjQO&_nc_oc=AdqoB1gjGWP4TXL6mrysDoG4b0Cq06rTfMtT9Mdx7vvZ1zimpHwSpFVYJ-fV_R3Eqj4&_nc_zt=23&_nc_ht=scontent-mnl3-3.xx&_nc_gid=AMzbT2Re-ZkTKtFFp9MP6A&_nc_ss=7f289&oh=00_AQLSpaHXW6HPyzH63y2HC4ffOtGy12x0XNLUp9XzywoFSA&oe=6AAD5815" 
+                        alt="Clarence Cabali Profile" 
+                        class="w-full h-full object-cover rounded-full filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
+                    >
+                </div>
+            </div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-dark-surface border border-dark-border text-xs sm:text-sm text-gray-300 mb-6">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span> Available for select roles
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
+                Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Clarence Cabali</span>
+            </h1>
+            <div class="text-xl sm:text-2xl md:text-3xl font-medium text-gray-400 h-16 flex items-center justify-center mb-6">
+                <span id="typewriter" class="text-accent border-r-2 border-accent pr-1 animate-pulse">Full-Stack Software Engineer</span>
+            </div>
+            <p class="max-w-2xl text-base sm:text-lg text-gray-400 mb-10 leading-relaxed">
+                Graduate of Batangas State University Arasof Campus. Passionate full-stack engineer focused on building robust web architectures, high-performance distributed backends, and pixel-perfect user interfaces.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center mb-12">
+                <a href="#projects" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-accent text-dark font-bold flex items-center justify-center gap-2 hover:bg-accent-hover transition-all shadow-lg shadow-accent/20">
+                    View Projects <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-dark-surface border border-dark-border text-white font-medium flex items-center justify-center gap-2 hover:border-accent/50 transition-all">
+                    Contact Me
+                </a>
+            </div>
+            <div class="flex items-center gap-4 text-gray-400">
+                <a href="https://github.com" target="_blank" class="p-3 rounded-xl bg-dark-surface border border-dark-border hover:text-accent transition-all"><i data-lucide="github" class="w-5 h-5"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="p-3 rounded-xl bg-dark-surface border border-dark-border hover:text-accent transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="https://twitter.com" target="_blank" class="p-3 rounded-xl bg-dark-surface border border-dark-border hover:text-accent transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-24 px-6 relative bg-dark-surface/50 border-t border-dark-border">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-2 block">Professional Overview</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">About Me & Expertise</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+                <div class="md:col-span-5 p-8 rounded-2xl bg-dark-surface border border-dark-border shadow-xl space-y-6">
+                    <h3 class="text-xl font-bold text-white mb-4">Core Background</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">I am an alumnus of <span class="text-white font-medium">Batangas State University Arasof Campus</span>. I believe software should be fast, resilient, and human-centric.</p>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0"></i> Clean Architecture & Code</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0"></i> Performance-First Engineering</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-accent shrink-0"></i> Accessible UI Design</li>
+                    </ul>
+                </div>
+                <div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-2xl bg-dark-surface border border-dark-border">
+                        <div class="flex items-center gap-3 mb-4"><i data-lucide="layers" class="w-5 h-5 text-accent"></i><h4 class="font-bold text-white text-lg">Frontend</h4></div>
+                        <div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Next.js</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">React</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">TypeScript</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Tailwind CSS</span></div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-dark-surface border border-dark-border">
+                        <div class="flex items-center gap-3 mb-4"><i data-lucide="server" class="w-5 h-5 text-accent"></i><h4 class="font-bold text-white text-lg">Backend</h4></div>
+                        <div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Node.js</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Python</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">FastAPI</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Go</span></div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-dark-surface border border-dark-border">
+                        <div class="flex items-center gap-3 mb-4"><i data-lucide="database" class="w-5 h-5 text-accent"></i><h4 class="font-bold text-white text-lg">Database</h4></div>
+                        <div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">PostgreSQL</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">MongoDB</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Redis</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Supabase</span></div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-dark-surface border border-dark-border">
+                        <div class="flex items-center gap-3 mb-4"><i data-lucide="cpu" class="w-5 h-5 text-accent"></i><h4 class="font-bold text-white text-lg">DevOps & Tools</h4></div>
+                        <div class="flex flex-wrap gap-2"><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Docker</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">AWS</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">CI/CD</span><span class="px-3 py-1 rounded-lg bg-dark border border-dark-border text-xs text-gray-300">Git</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-24 px-6 relative border-t border-dark-border">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-2 block">Portfolio Work</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-6">Featured Projects</h2>
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <button onclick="filterProjects('All')" class="filter-btn px-5 py-2 rounded-xl text-sm font-medium bg-accent text-dark font-semibold">All</button>
+                    <button onclick="filterProjects('Fullstack')" class="filter-btn px-5 py-2 rounded-xl text-sm font-medium bg-dark-surface border border-dark-border text-gray-400 hover:text-white">Fullstack</button>
+                    <button onclick="filterProjects('Frontend')" class="filter-btn px-5 py-2 rounded-xl text-sm font-medium bg-dark-surface border border-dark-border text-gray-400 hover:text-white">Frontend</button>
+                    <button onclick="filterProjects('Open Source')" class="filter-btn px-5 py-2 rounded-xl text-sm font-medium bg-dark-surface border border-dark-border text-gray-400 hover:text-white">Open Source</button>
+                </div>
+            </div>
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project cards inserted via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-24 px-6 relative bg-dark-surface/50 border-t border-dark-border">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-2 block">Career Journey</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Work History & Education</h2>
+            </div>
+            <div class="relative border-l border-dark-border ml-4 sm:ml-8 space-y-12">
+                <div class="relative pl-8 sm:pl-10">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-dark border-2 border-accent flex items-center justify-center text-accent"><i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i></div>
+                    <div class="p-8 rounded-2xl bg-dark-surface border border-dark-border shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div><h3 class="text-xl font-bold text-white">Bachelor's Degree</h3><p class="text-base font-medium text-gray-300">Batangas State University Arasof Campus</p></div>
+                        </div>
+                        <p class="text-sm text-gray-300">Completed undergraduate studies with a strong focus on computer systems, software engineering fundamentals, and modern web application development.</p>
+                    </div>
+                </div>
+                <div class="relative pl-8 sm:pl-10">
+                    <div class="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-dark border-2 border-accent flex items-center justify-center text-accent"><i data-lucide="briefcase" class="w-3.5 h-3.5"></i></div>
+                    <div class="p-8 rounded-2xl bg-dark-surface border border-dark-border shadow-xl">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div><h3 class="text-xl font-bold text-white">Senior Full-Stack Engineer</h3><p class="text-base font-medium text-gray-300">Apex Cloud Solutions</p></div>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-dark border border-dark-border text-accent font-medium text-xs">2023 — Present</span>
+                        </div>
+                        <ul class="space-y-2 mb-6 text-sm text-gray-300">
+                            <li>• Architected micro-frontend architecture using Next.js, reducing page load by 42%.</li>
+                            <li>• Mentored a team of 6 developers and optimized PostgreSQL query latency by 65%.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 px-6 relative border-t border-dark-border">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-2 block">Get In Touch</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">Let's Build Something Together</h2>
+                <p class="text-gray-400 text-base">Have a project in mind, an open role, or just want to say hi? Drop a message below!</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+                <div class="md:col-span-5 p-8 rounded-2xl bg-dark-surface border border-dark-border shadow-xl space-y-6">
+                    <h3 class="text-xl font-bold text-white">Contact Information</h3>
+                    <p class="text-gray-300 text-sm">I am currently open to freelance contracts and full-time opportunities.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 text-gray-300">
+                            <div class="p-3 rounded-xl bg-accent/10 border border-accent/20 text-accent"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                            <div><span class="text-xs text-gray-500 block">Direct Email</span><a href="mailto:clarencecabali.socmed@gmail.com" class="text-sm font-semibold hover:text-accent">clarencecabali.socmed@gmail.com</a></div>
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-300">
+                            <div class="p-3 rounded-xl bg-accent/10 border border-accent/20 text-accent"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                            <div><span class="text-xs text-gray-500 block">Phone Number</span><a href="tel:09919134617" class="text-sm font-semibold hover:text-accent">09919134617</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-7 p-8 rounded-2xl bg-dark-surface border border-dark-border shadow-xl">
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6" novalidate>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-xl bg-dark border border-dark-border text-white text-sm focus:outline-none focus:border-accent" placeholder="Jane Doe">
+                            <span id="name-error" class="text-xs text-red-500 mt-1 hidden">Name is required.</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-xl bg-dark border border-dark-border text-white text-sm focus:outline-none focus:border-accent" placeholder="jane@example.com">
+                            <span id="email-error" class="text-xs text-red-500 mt-1 hidden">Valid email is required.</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-xl bg-dark border border-dark-border text-white text-sm focus:outline-none focus:border-accent resize-none" placeholder="Tell me about your project..."></textarea>
+                            <span id="message-error" class="text-xs text-red-500 mt-1 hidden">Message must be at least 10 characters.</span>
+                        </div>
+                        <button type="submit" class="w-full py-4 rounded-xl bg-accent text-dark font-bold text-sm flex items-center justify-center gap-2 hover:bg-accent-hover transition-all">
+                            Send Message <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                    <div id="success-msg" class="hidden py-12 text-center space-y-4">
+                        <div class="w-16 h-16 rounded-full bg-accent/10 border border-accent/20 text-accent flex items-center justify-center mx-auto"><i data-lucide="check-circle-2" class="w-8 h-8"></i></div>
+                        <h3 class="text-2xl font-bold text-white">Message Sent Successfully!</h3>
+                        <p class="text-gray-400 text-sm">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-dark-border bg-dark text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent"><i data-lucide="code-2" class="w-4 h-4"></i></div><span class="font-bold text-white">Clarence Cabali</span></div>
+            <p class="text-xs text-gray-500">© 2026 Clarence Cabali. Built with HTML, Tailwind CSS & JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-dark/80', 'backdrop-blur-md', 'border-b', 'border-dark-border', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-dark/80', 'backdrop-blur-md', 'border-b', 'border-dark-border', 'shadow-lg');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Projects Data & Filter
+        const projects = [
+            { title: "PulseAnalytics - SaaS Dashboard", category: "Fullstack", desc: "Real-time analytics platform monitoring server health, API latency, and user events.", tags: ["Next.js", "TypeScript", "Tailwind", "PostgreSQL"], image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" },
+            { title: "DevFlow Design System", category: "Frontend", desc: "An accessible, themeable UI component library built for developer-first applications.", tags: ["React", "TypeScript", "Tailwind CSS"], image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" },
+            { title: "OmniSearch Open Source CLI", category: "Open Source", desc: "Lightning-fast fuzzy search tool for local codebases written in Go.", tags: ["Go", "CLI", "Concurrency"], image: "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?auto=format&fit=crop&w=800&q=80" },
+            { title: "E-Commerce Micro-Engine", category: "Fullstack", desc: "High-throughput storefront backend with dynamic inventory allocation and Stripe webhooks.", tags: ["Node.js", "PostgreSQL", "Docker"], image: "https://images.unsplash.com/photo-1556742049-0a67d553c299?auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        function renderProjects(filtered) {
+            const grid = document.getElementById('project-grid');
+            grid.innerHTML = filtered.map(p => `
+                <div class="rounded-2xl bg-dark-surface border border-dark-border overflow-hidden flex flex-col justify-between hover:border-accent/50 transition-all shadow-xl">
+                    <div>
+                        <div class="relative h-60 w-full overflow-hidden bg-dark">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover opacity-80">
+                            <span class="absolute top-4 right-4 px-3 py-1 rounded-lg bg-dark/80 text-xs font-medium text-accent">${p.category}</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${p.title}</h3>
+                            <p class="text-gray-400 text-sm mb-4">${p.desc}</p>
+                            <div class="flex flex-wrap gap-2">${p.tags.map(t => `<span class="px-2.5 py-1 rounded-md bg-dark border border-dark-border text-xs text-gray-300">${t}</span>`).join('')}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProjects(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-5 py-2 rounded-xl text-sm font-medium bg-dark-surface border border-dark-border text-gray-400 hover:text-white";
+                if(btn.textContent === cat) {
+                    btn.className = "filter-btn px-5 py-2 rounded-xl text-sm font-medium bg-accent text-dark font-semibold";
+                }
+            });
+            if(cat === 'All') renderProjects(projects);
+            else renderProjects(projects.filter(p => p.category === cat));
+        }
+        renderProjects(projects);
+
+        // Form Validation
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            let isValid = true;
+            
+            if(!name) {
+                document.getElementById('name-error').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('name-error').classList.add('hidden');
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!emailRegex.test(email)) {
+                document.getElementById('email-error').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('email-error').classList.add('hidden');
+            }
+            
+            if(message.length < 10) {
+                document.getElementById('message-error').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('message-error').classList.add('hidden');
+            }
+            
+            if(isValid) {
+                document.getElementById('contact-form').classList.add('hidden');
+                document.getElementById('success-msg').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
