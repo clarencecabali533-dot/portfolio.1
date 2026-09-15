@@ -420,6 +420,38 @@
   .contact-row .cr-info{min-width:0; flex:1 1 200px;}
   .contact-row .cr-k{font-family:var(--mono); font-size:.7rem; color:var(--text-faint); margin-bottom:4px;}
   .contact-row .cr-v{font-size:.94rem; font-weight:500; overflow-wrap:anywhere; word-break:break-word;}
+
+  /* ---------- Analytics (private, owner only) ---------- */
+  .analytics-section{display:none;}
+  .analytics-section.show{display:block;}
+  .analytics-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px;}
+  .analytics-stat{
+    background:var(--surface-2);
+    border:1px solid var(--border-soft);
+    border-radius:var(--radius);
+    padding:20px;
+  }
+  .analytics-stat .k{font-family:var(--mono); font-size:.7rem; color:var(--text-faint); margin-bottom:8px; letter-spacing:.04em;}
+  .analytics-stat .v{font-size:1.7rem; font-weight:600; color:var(--text);}
+  .analytics-table-wrap{
+    background:var(--surface-2);
+    border:1px solid var(--border-soft);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .analytics-table{width:100%; border-collapse:collapse; font-size:.9rem;}
+  .analytics-table th{
+    text-align:left; font-family:var(--mono); font-size:.68rem; color:var(--text-faint);
+    padding:12px 20px; border-bottom:1px solid var(--border-soft); letter-spacing:.04em;
+  }
+  .analytics-table td{padding:12px 20px; border-bottom:1px solid var(--border-soft);}
+  .analytics-table tr:last-child td{border-bottom:none;}
+  .analytics-msg{padding:24px 20px; color:var(--text-faint); font-size:.92rem; text-align:center;}
+  .analytics-msg.error{color:var(--danger);}
+  @media (max-width:700px){
+    .analytics-stats{grid-template-columns:1fr;}
+    .analytics-table th, .analytics-table td{padding:10px 14px; font-size:.82rem;}
+  }
   .copy-btn{
     border:1px solid var(--border);
     color:var(--text-muted);
@@ -555,6 +587,104 @@
     .toast{left:16px; right:16px; transform:translateY(20px); width:auto; text-align:center;}
     .toast.show{transform:translateY(0);}
   }
+  /* ---------- Floating hire-me widget ---------- */
+  .float-widget{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:800;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:12px;
+    font-family:var(--body);
+  }
+  .float-card{
+    width:300px;
+    max-width:calc(100vw - 40px);
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow:0 18px 40px rgba(0,0,0,.45);
+    transform:translateY(12px) scale(.97);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .float-card.open{
+    transform:translateY(0) scale(1);
+    opacity:1;
+    pointer-events:auto;
+  }
+  .float-card-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .float-card-head strong{
+    font-family:var(--display);
+    font-size:.98rem;
+    color:var(--text);
+  }
+  .float-card-close{
+    color:var(--text-faint);
+    font-size:1rem;
+    line-height:1;
+    padding:2px 4px;
+    border-radius:6px;
+  }
+  .float-card-close:hover{color:var(--text); background:var(--surface-2);}
+  .float-card p{
+    font-size:.87rem;
+    color:var(--text-muted);
+    line-height:1.55;
+    margin-bottom:14px;
+  }
+  .float-contact{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .float-contact a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:.82rem;
+    color:var(--text);
+    background:var(--surface-2);
+    border:1px solid var(--border-soft);
+    padding:9px 11px;
+    border-radius:var(--radius-sm);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .float-contact a:hover{border-color:var(--accent); color:var(--accent);}
+  .float-toggle{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#171310;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 12px 28px rgba(212,162,76,.35);
+    font-size:1.3rem;
+    transition:background .15s ease, transform .15s ease;
+    flex-shrink:0;
+  }
+  .float-toggle:hover{background:var(--accent-strong); transform:translateY(-2px);}
+  .float-toggle .icon-close{display:none;}
+  .float-widget.open .float-toggle .icon-chat{display:none;}
+  .float-widget.open .float-toggle .icon-close{display:block;}
+  @media (max-width:480px){
+    .float-widget{right:16px; bottom:16px;}
+    .float-card{width:calc(100vw - 32px);}
+  }
 </style>
 </head>
 <body>
@@ -684,6 +814,32 @@
             <button class="copy-btn" id="copyEmail" data-copy="clarencecabali30.socmed@gmail.com">copy</button>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANALYTICS (private, only visible to you in edit mode) -->
+  <section id="analytics" class="section-border analytics-section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Private</div>
+          <h2>Visitor analytics</h2>
+          <div class="section-sub">Only visible to you, while unlocked. Regular visitors never see this.</div>
+        </div>
+        <button class="btn" id="refreshAnalyticsBtn">Refresh</button>
+      </div>
+      <div class="analytics-stats">
+        <div class="analytics-stat"><div class="k">VISITS (LAST 30 DAYS)</div><div class="v" id="statVisits30">—</div></div>
+        <div class="analytics-stat"><div class="k">PAGE VIEWS (LAST 30 DAYS)</div><div class="v" id="statViews30">—</div></div>
+        <div class="analytics-stat"><div class="k">VISITS TODAY</div><div class="v" id="statVisitsToday">—</div></div>
+      </div>
+      <div class="analytics-table-wrap">
+        <table class="analytics-table" id="analyticsTable" style="display:none;">
+          <thead><tr><th>Date</th><th>Visits</th></tr></thead>
+          <tbody id="analyticsTableBody"></tbody>
+        </table>
+        <div class="analytics-msg" id="analyticsMsg">Loading…</div>
       </div>
     </div>
   </section>
@@ -820,6 +976,24 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="float-widget" id="floatWidget">
+  <div class="float-card" id="floatCard">
+    <div class="float-card-head">
+      <strong>Need a Capstone or Web App?</strong>
+      <button type="button" class="float-card-close" id="floatCardClose" aria-label="Close">✕</button>
+    </div>
+    <p>Want to buy or build a capstone project or any web development project? Reach out — I'll be glad to help.</p>
+    <div class="float-contact">
+      <a href="tel:+639919134617">📞 0991 913 4617</a>
+      <a href="mailto:clarencecabali30.socmed@gmail.com">✉️ clarencecabali30.socmed@gmail.com</a>
+    </div>
+  </div>
+  <button type="button" class="float-toggle" id="floatToggle" aria-label="Contact me">
+    <span class="icon-chat">💬</span>
+    <span class="icon-close">✕</span>
+  </button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1026,10 +1200,83 @@
     editMode = true;
     document.getElementById('editBadge').classList.add('show');
     document.getElementById('addProjectBtn').style.display = 'inline-flex';
+    document.getElementById('analytics').classList.add('show');
     renderProjects();
+    fetchAnalytics();
     showToast('Edit mode unlocked');
     openProfileModal();
   }
+
+  /* ---------- Analytics (private, owner-only) ---------- */
+  // Paste the Cloudflare Worker URL you deployed here, e.g.
+  // 'https://portfolio-analytics-proxy.yourname.workers.dev'
+  var ANALYTICS_WORKER_URL = '';
+
+  function fetchAnalytics(){
+    var msg = document.getElementById('analyticsMsg');
+    var table = document.getElementById('analyticsTable');
+    var tbody = document.getElementById('analyticsTableBody');
+
+    if(!ANALYTICS_WORKER_URL){
+      msg.textContent = 'Set ANALYTICS_WORKER_URL in the script to connect your Cloudflare Worker.';
+      msg.classList.add('error');
+      msg.style.display = 'block';
+      table.style.display = 'none';
+      return;
+    }
+
+    msg.textContent = 'Loading…';
+    msg.classList.remove('error');
+    msg.style.display = 'block';
+    table.style.display = 'none';
+
+    fetch(ANALYTICS_WORKER_URL + '?days=30')
+      .then(function(res){ return res.json(); })
+      .then(function(data){
+        var groups = data && data.data && data.data.viewer && data.data.viewer.accounts && data.data.viewer.accounts[0]
+          ? data.data.viewer.accounts[0].rumPageloadEventsAdaptiveGroups
+          : null;
+
+        if(!groups){
+          msg.textContent = 'No data yet — check the Worker is deployed and the token is correct.';
+          msg.classList.add('error');
+          return;
+        }
+
+        var byDate = {};
+        var totalVisits = 0, totalViews = 0;
+        groups.forEach(function(g){
+          var d = g.dimensions.date;
+          var visits = (g.sum && g.sum.visits) || 0;
+          byDate[d] = (byDate[d] || 0) + visits;
+          totalVisits += visits;
+          totalViews += g.count || 0;
+        });
+
+        var dates = Object.keys(byDate).sort().reverse();
+        var todayStr = new Date().toISOString().split('T')[0];
+
+        document.getElementById('statVisits30').textContent = totalVisits;
+        document.getElementById('statViews30').textContent = totalViews;
+        document.getElementById('statVisitsToday').textContent = byDate[todayStr] || 0;
+
+        if(dates.length){
+          tbody.innerHTML = dates.map(function(d){
+            return '<tr><td>' + d + '</td><td>' + byDate[d] + '</td></tr>';
+          }).join('');
+          table.style.display = '';
+          msg.style.display = 'none';
+        }else{
+          msg.textContent = 'No visits recorded in this range yet.';
+        }
+      })
+      .catch(function(){
+        msg.textContent = 'Could not reach the analytics Worker. Check the URL and that it\'s deployed.';
+        msg.classList.add('error');
+      });
+  }
+
+  document.getElementById('refreshAnalyticsBtn').addEventListener('click', fetchAnalytics);
 
   /* ---------- Password modal ---------- */
   var pwBackdrop = document.getElementById('passwordModalBackdrop');
@@ -1071,6 +1318,7 @@
     editMode = false;
     document.getElementById('editBadge').classList.remove('show');
     document.getElementById('addProjectBtn').style.display = 'none';
+    document.getElementById('analytics').classList.remove('show');
     renderProjects();
     showToast('Edit mode locked');
   }
@@ -1271,6 +1519,31 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2200);
   }
+
+  /* ---------- Floating hire-me widget ---------- */
+  var floatWidget = document.getElementById('floatWidget');
+  var floatCard = document.getElementById('floatCard');
+  var floatToggle = document.getElementById('floatToggle');
+  var floatCardClose = document.getElementById('floatCardClose');
+
+  function openFloatCard(){
+    floatWidget.classList.add('open');
+    floatCard.classList.add('open');
+  }
+  function closeFloatCard(){
+    floatWidget.classList.remove('open');
+    floatCard.classList.remove('open');
+  }
+  floatToggle.addEventListener('click', function(){
+    if(floatCard.classList.contains('open')) closeFloatCard();
+    else openFloatCard();
+  });
+  floatCardClose.addEventListener('click', closeFloatCard);
+  document.addEventListener('click', function(e){
+    if(!floatWidget.contains(e.target)) closeFloatCard();
+  });
+
+  setTimeout(openFloatCard, 1200);
 
 })();
 </script>
