@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clarence Cabali — Web Developer</title>
 <meta name="description" content="Portfolio of Clarence Cabali, web developer skilled in PHP, MySQL, Python, Java, and JavaScript.">
@@ -93,6 +94,31 @@
     display:flex; align-items:center; gap:9px;
   }
   .logo .dot{width:7px; height:7px; border-radius:50%; background:var(--accent);}
+  .visitor-counter-slot{
+    display:inline-flex;
+    align-items:center;
+    margin-left:10px;
+  }
+  .visitor-counter-slot a{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-family:var(--mono);
+    font-size:.72rem;
+    color:var(--text-muted);
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:4px 10px;
+    border-radius:20px;
+    line-height:1;
+  }
+  .visitor-counter-slot a::before{
+    content:"👁";
+    font-size:.85em;
+  }
+  @media (max-width:480px){
+    .visitor-counter-slot{display:none;}
+  }
   .nav-links{
     display:flex; align-items:center; gap:6px;
   }
@@ -691,7 +717,7 @@
 
 <header>
   <div class="nav">
-    <div class="logo"><span class="dot"></span><span id="navName">Clarence Cabali</span></div>
+    <div class="logo"><span class="dot"></span><span id="navName">Clarence Cabali</span><span id="visitorCounterSlot" class="visitor-counter-slot"></span></div>
     <nav class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -1572,5 +1598,27 @@
 <!-- GoatCounter visitor tracking (free, no Cloudflare) -->
 <script data-goatcounter="https://clarencecabali.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+
+<!-- Live visitor count badge next to the name (public, no API token needed) -->
+<!-- Requires: on your GoatCounter dashboard, go to Settings and turn on
+     "Allow adding visitor counts on your website" -->
+<script>
+  (function(){
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if(window.goatcounter && window.goatcounter.visit_count){
+        clearInterval(t);
+        window.goatcounter.visit_count({
+          append: '#visitorCounterSlot',
+          type: 'html',
+          no_branding: true
+        });
+      } else if(tries > 50){
+        clearInterval(t); // gave up after ~5s, GoatCounter script may not have loaded
+      }
+    }, 100);
+  })();
+</script>
 </body>
 </html>
