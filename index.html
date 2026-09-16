@@ -831,7 +831,7 @@
       </div>
       <div class="analytics-stats">
         <div class="analytics-stat"><div class="k">VISITS (LAST 30 DAYS)</div><div class="v" id="statVisits30">—</div></div>
-        <div class="analytics-stat"><div class="k">PAGE VIEWS (LAST 30 DAYS)</div><div class="v" id="statViews30">—</div></div>
+        <div class="analytics-stat"><div class="k">BUSIEST DAY</div><div class="v" id="statViews30">—</div></div>
         <div class="analytics-stat"><div class="k">VISITS TODAY</div><div class="v" id="statVisitsToday">—</div></div>
       </div>
       <div class="analytics-table-wrap">
@@ -986,8 +986,8 @@
     </div>
     <p>Want to build a capstone project, business website or any web development project? Reach out — I'll be glad to help.</p>
     <div class="float-contact">
-      <a href="tel:+639919134617">📞 0991 913 4617</a>
-      <a href="mailto:clarencecabali30.socmed@gmail.com">✉️ clarencecabali30.socmed@gmail.com</a>
+      <a href="tel:+639919134617" id="floatPhoneLink">📞 0991 913 4617</a>
+      <a href="mailto:clarencecabali30.socmed@gmail.com" id="floatEmailLink">✉️ clarencecabali30.socmed@gmail.com</a>
     </div>
   </div>
   <button type="button" class="float-toggle" id="floatToggle" aria-label="Contact me">
@@ -1112,6 +1112,14 @@
     document.getElementById('emailBtn').href = 'mailto:' + profile.email;
     document.getElementById('callBtn').href = phoneHref(profile.phoneRaw || profile.phone);
 
+    var floatPhone = document.getElementById('floatPhoneLink');
+    floatPhone.textContent = '📞 ' + profile.phone;
+    floatPhone.href = phoneHref(profile.phoneRaw || profile.phone);
+
+    var floatEmail = document.getElementById('floatEmailLink');
+    floatEmail.textContent = '✉️ ' + profile.email;
+    floatEmail.href = 'mailto:' + profile.email;
+
     document.getElementById('footerName').innerHTML = '© <span id="footerYear">' + new Date().getFullYear() + '</span> ' + escapeHtml(profile.name);
 
     var photoSrc = profile.photo || DEFAULT_PHOTO;
@@ -1208,17 +1216,23 @@
   }
 
   /* ---------- Analytics (private, owner-only) ---------- */
-  // Paste the Cloudflare Worker URL you deployed here, e.g.
-  // 'https://portfolio-analytics-proxy.yourname.workers.dev'
-  var ANALYTICS_WORKER_URL = '';
+  // 1. Sign up free at https://www.goatcounter.com and create a site (pick a
+  //    code, e.g. "clarencecabali" -> https://clarencecabali.goatcounter.com)
+  // 2. Add the tracking script to this page (see bottom of <body>):
+  //    <script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  // 3. Create a read-only API token: click your username (top right on your
+  //    GoatCounter dashboard) -> API -> New token -> permission "Read stats".
+  // 4. Paste your site code and token below.
+  var GOATCOUNTER_SITE = 'clarencecabali'; // set
+  var GOATCOUNTER_TOKEN = 'c1i349go1leftbr3t5uvocyqofucaesm7erl1gxa9vkbbcvde'; // set
 
   function fetchAnalytics(){
     var msg = document.getElementById('analyticsMsg');
     var table = document.getElementById('analyticsTable');
     var tbody = document.getElementById('analyticsTableBody');
 
-    if(!ANALYTICS_WORKER_URL){
-      msg.textContent = 'Set ANALYTICS_WORKER_URL in the script to connect your Cloudflare Worker.';
+    if(!GOATCOUNTER_SITE || !GOATCOUNTER_TOKEN){
+      msg.textContent = 'Set GOATCOUNTER_SITE and GOATCOUNTER_TOKEN in the script to connect GoatCounter.';
       msg.classList.add('error');
       msg.style.display = 'block';
       table.style.display = 'none';
@@ -1230,39 +1244,47 @@
     msg.style.display = 'block';
     table.style.display = 'none';
 
-    fetch(ANALYTICS_WORKER_URL + '?days=30')
-      .then(function(res){ return res.json(); })
-      .then(function(data){
-        var groups = data && data.data && data.data.viewer && data.data.viewer.accounts && data.data.viewer.accounts[0]
-          ? data.data.viewer.accounts[0].rumPageloadEventsAdaptiveGroups
-          : null;
+    var end = new Date();
+    var start = new Date(end.getTime() - 30 * 24 * 60 * 60 * 1000);
+    var apiUrl = 'https://' + GOATCOUNTER_SITE + '.goatcounter.com/api/v0/stats/total'
+      + '?start=' + start.toISOString() + '&end=' + end.toISOString();
 
-        if(!groups){
-          msg.textContent = 'No data yet — check the Worker is deployed and the token is correct.';
+    fetch(apiUrl, {
+      headers: {
+        'Authorization': 'Bearer ' + GOATCOUNTER_TOKEN,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(function(res){
+        if(!res.ok) throw new Error('bad response');
+        return res.json();
+      })
+      .then(function(data){
+        if(!data || !data.stats){
+          msg.textContent = 'No data yet — check the site code and token are correct.';
           msg.classList.add('error');
           return;
         }
 
-        var byDate = {};
-        var totalVisits = 0, totalViews = 0;
-        groups.forEach(function(g){
-          var d = g.dimensions.date;
-          var visits = (g.sum && g.sum.visits) || 0;
-          byDate[d] = (byDate[d] || 0) + visits;
-          totalVisits += visits;
-          totalViews += g.count || 0;
+        var stats = data.stats; // [{day:'2026-09-01', daily: 12}, ...]
+        var todayStr = new Date().toISOString().split('T')[0];
+        var todayCount = 0, busiest = 0;
+
+        stats.forEach(function(s){
+          var d = s.daily || 0;
+          if(s.day === todayStr) todayCount = d;
+          if(d > busiest) busiest = d;
         });
 
-        var dates = Object.keys(byDate).sort().reverse();
-        var todayStr = new Date().toISOString().split('T')[0];
+        document.getElementById('statVisits30').textContent = data.total || 0;
+        document.getElementById('statViews30').textContent = busiest;
+        document.getElementById('statVisitsToday').textContent = todayCount;
 
-        document.getElementById('statVisits30').textContent = totalVisits;
-        document.getElementById('statViews30').textContent = totalViews;
-        document.getElementById('statVisitsToday').textContent = byDate[todayStr] || 0;
+        var withData = stats.filter(function(s){ return s.daily; }).sort(function(a,b){ return a.day < b.day ? 1 : -1; });
 
-        if(dates.length){
-          tbody.innerHTML = dates.map(function(d){
-            return '<tr><td>' + d + '</td><td>' + byDate[d] + '</td></tr>';
+        if(withData.length){
+          tbody.innerHTML = withData.map(function(s){
+            return '<tr><td>' + s.day + '</td><td>' + s.daily + '</td></tr>';
           }).join('');
           table.style.display = '';
           msg.style.display = 'none';
@@ -1271,7 +1293,7 @@
         }
       })
       .catch(function(){
-        msg.textContent = 'Could not reach the analytics Worker. Check the URL and that it\'s deployed.';
+        msg.textContent = 'Could not reach GoatCounter. Check the site code and token.';
         msg.classList.add('error');
       });
   }
@@ -1547,6 +1569,8 @@
 
 })();
 </script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d9ddd61d923e413dbbf38790a76541d4"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- GoatCounter visitor tracking (free, no Cloudflare) -->
+<script data-goatcounter="https://clarencecabali.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
