@@ -97,27 +97,23 @@
   .visitor-counter-slot{
     display:inline-flex;
     align-items:center;
-    margin-left:10px;
   }
   .visitor-counter-slot a{
     display:inline-flex;
     align-items:center;
-    gap:5px;
+    gap:6px;
     font-family:var(--mono);
-    font-size:.72rem;
-    color:var(--text-muted);
-    background:var(--surface);
+    font-size:.82rem;
+    color:var(--text);
+    background:var(--surface-2);
     border:1px solid var(--border);
-    padding:4px 10px;
+    padding:8px 14px;
     border-radius:20px;
     line-height:1;
   }
   .visitor-counter-slot a::before{
     content:"👁";
-    font-size:.85em;
-  }
-  @media (max-width:480px){
-    .visitor-counter-slot{display:none;}
+    font-size:1em;
   }
   .nav-links{
     display:flex; align-items:center; gap:6px;
@@ -717,7 +713,7 @@
 
 <header>
   <div class="nav">
-    <div class="logo"><span class="dot"></span><span id="navName">Clarence Cabali</span><span id="visitorCounterSlot" class="visitor-counter-slot"></span></div>
+    <div class="logo"><span class="dot"></span><span id="navName">Clarence Cabali</span></div>
     <nav class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -945,6 +941,10 @@
     </div>
     <div class="modal-body">
       <div id="profileForm">
+        <div class="field" id="visitorCounterRow">
+          <label>Page views</label>
+          <span id="visitorCounterSlot" class="visitor-counter-slot"></span>
+        </div>
         <div class="field">
           <label>Profile photo</label>
           <div class="photo-preview-row">
